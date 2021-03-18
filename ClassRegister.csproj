@@ -10,6 +10,11 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.4" />
-  </ItemGroup>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
+  </ItemGroup>  
+
+  <Target Name="Create bundles" BeforeTargets="BeforeBuild">
+    <Exec Command="npm run build" />
+  </Target>
 
 </Project>

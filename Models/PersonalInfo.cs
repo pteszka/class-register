@@ -27,5 +27,4 @@ namespace ClassRegister.Models
         [Display(Name = "Birthday")]
         public DateTime DateOfBirth { get; set; }
     }
-
 }

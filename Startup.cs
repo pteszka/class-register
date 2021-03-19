@@ -29,6 +29,15 @@ namespace ClassRegister
 
             services.AddDbContext<ClassRegisterContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("ClassRegisterContext")));
+
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options =>
+                {
+                    options.LoginPath = "/Login";
+                    options.LogoutPath = "/Logout";
+                    options.Cookie.SecurePolicy = CookieSecurePolicy.None;
+                    options.Cookie.SameSite = SameSiteMode.Strict;
+                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -49,6 +58,7 @@ namespace ClassRegister
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

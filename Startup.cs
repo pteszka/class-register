@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ClassRegister.Data;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -38,6 +41,8 @@ namespace ClassRegister
                     options.Cookie.SecurePolicy = CookieSecurePolicy.None;
                     options.Cookie.SameSite = SameSiteMode.Strict;
                 });
+                
+            services.AddMvc(options => options.Filters.Add(new AuthorizeFilter()));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -58,6 +63,7 @@ namespace ClassRegister
 
             app.UseRouting();
 
+            app.UseCookiePolicy();
             app.UseAuthentication();
             app.UseAuthorization();
 

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ClassRegister.Data;
+using ClassRegister.Interfaces;
+using ClassRegister.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -28,21 +30,23 @@ namespace ClassRegister
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
-
             services.AddDbContext<ClassRegisterContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("ClassRegisterContext")));
 
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(options =>
                 {
-                    options.LoginPath = "/Login";
-                    options.LogoutPath = "/Logout";
+                    options.LoginPath = "/Accounts/Login";
+                    options.LogoutPath = "/Accounts/Logout";
                     options.Cookie.SecurePolicy = CookieSecurePolicy.None;
                     options.Cookie.SameSite = SameSiteMode.Strict;
                 });
                 
+                services.AddControllersWithViews();
+
             services.AddMvc(options => options.Filters.Add(new AuthorizeFilter()));
+
+            services.AddScoped<IAccount, AccountServices>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

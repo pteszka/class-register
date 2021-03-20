@@ -11,11 +11,11 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
-
+using ClassRegister.Interfaces;
 
 namespace ClassRegister.Services
 {
-    public class AccountServices
+    public class AccountServices : IAccount
     {
         private readonly ClassRegisterContext _context;
 

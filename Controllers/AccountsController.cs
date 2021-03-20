@@ -8,16 +8,23 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using System;
+using ClassRegister.Interfaces;
 
 namespace ClassRegister.Controllers
 {
-    public class ClassRegister : Controller
+    public class AccountsController : Controller
     {
-        private readonly AccountServices _accountServices;
+        private readonly IAccount _account;
 
-        public ClassRegister(AccountServices accountServices)
+        public AccountsController(IAccount account)
         {
-            _accountServices = accountServices;
+            _account = account;
+        }
+
+        [AllowAnonymous]
+        public IActionResult Login()
+        {
+            return View();
         }
 
         [HttpPost]
@@ -27,11 +34,11 @@ namespace ClassRegister.Controllers
         {
             if (ModelState.IsValid)
             {
-                var account = await _accountServices.GetAccountFromDB(loginViewModel);
+                var account = await _account.GetAccountFromDB(loginViewModel);
 
                 if (account != null)
                 {
-                    var claimsIdentity = _accountServices.CreateClaim(account);
+                    var claimsIdentity = _account.CreateClaim(account);
                     var authProperties = new AuthenticationProperties
                     {
                         ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(10),
@@ -41,7 +48,7 @@ namespace ClassRegister.Controllers
                         CookieAuthenticationDefaults.AuthenticationScheme,
                         new ClaimsPrincipal(claimsIdentity));
                     // add redirection to view 
-                    return RedirectToAction("");
+                    return View();
                 }
                 return NotFound();
             }

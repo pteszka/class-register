@@ -1,9 +1,13 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ClassRegister.Models 
 {
     public class Account
-    {
+    {   
+        [Key]
+        // [ScaffoldColumn(false)]
+        // [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int AccountId { get; set; }
 
         [Required]

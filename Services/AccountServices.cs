@@ -38,6 +38,7 @@ namespace ClassRegister.Services
             var role = account.Role;
             var claims = new List<Claim>
                 {
+                    new Claim(ClaimTypes.Name, account.Email),
                     new Claim(ClaimTypes.Email, account.Email),
                     new Claim(ClaimTypes.Role as string, account.Role.ToString())
                 };

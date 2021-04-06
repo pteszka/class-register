@@ -10,5 +10,8 @@ namespace ClassRegister.Models
 
         [Required]
         public PersonalInfo PersonalInfo { get; set; }
+
+        [Required]
+        public Account Account { get; set; }
     }
 }

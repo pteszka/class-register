@@ -30,6 +30,8 @@ namespace ClassRegister
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddControllersWithViews();
+
             services.AddDbContext<ClassRegisterContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("ClassRegisterContext")));
 
@@ -41,12 +43,12 @@ namespace ClassRegister
                     options.Cookie.SecurePolicy = CookieSecurePolicy.None;
                     options.Cookie.SameSite = SameSiteMode.Strict;
                 });
-                
-                services.AddControllersWithViews();
+            
 
             services.AddMvc(options => options.Filters.Add(new AuthorizeFilter()));
 
             services.AddScoped<IAccount, AccountServices>();
+            services.AddScoped<IAdmin, AdminServices>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

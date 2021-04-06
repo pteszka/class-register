@@ -48,7 +48,7 @@ namespace ClassRegister.Controllers
                         CookieAuthenticationDefaults.AuthenticationScheme,
                         new ClaimsPrincipal(claimsIdentity));
                     // add redirection to view 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Admin");
                 }
                 return NotFound();
             }

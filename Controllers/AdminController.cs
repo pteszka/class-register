@@ -12,20 +12,19 @@ using ClassRegister.Interfaces;
 
 namespace ClassRegister.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
-        private readonly IAccount _account;
+        private readonly IAdmin _admin;
 
-        public AdminController(IAccount account)
+        public AdminController(IAdmin admin)
         {
-            _account = account;
+            _admin = admin;
         }
 
-        [AllowAnonymous]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            return View(await _admin.GetTeachersAsync());
         }
-
     }
 }

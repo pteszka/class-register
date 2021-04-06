@@ -34,6 +34,8 @@ namespace ClassRegister.Services
         {
             var teachers = await _context
                                 .Teachers
+                                .Include(t => t.PersonalInfo)
+                                .Include(t => t.Account)
                                 .ToListAsync();
             return teachers;
         }
@@ -43,11 +45,6 @@ namespace ClassRegister.Services
             var teacher = await _context
                                 .Teachers
                                 .FirstOrDefaultAsync(t => t.TeacherId == id);
-            
-            // if (teacher == null)
-            // {
-            //     throw new ArgumentNullException(nameof(teacher));
-            // }
             return teacher;
         }
     }

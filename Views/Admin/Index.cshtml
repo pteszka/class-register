@@ -1,0 +1,43 @@
+@model IEnumerable<Teacher>
+
+@{
+    ViewData["Title"] = "Admin Page";
+}
+
+@* <div class="text-center">
+    <h5>Hello, @User.Identity.Name!</h5>
+</div> *@
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.PersonalInfo.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PersonalInfo.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PersonalInfo.DateOfBirth)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model) 
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PersonalInfo.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PersonalInfo.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PersonalInfo.DateOfBirth)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<button type="submit" class="btn btn-primary">Add Teacher</button>

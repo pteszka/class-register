@@ -11,10 +11,10 @@ namespace ClassRegister.Models
     {
         [Key]
         public int TeacherId { get; set; }
+        public Subject subject { get; set; }
 
         [Required]
         public PersonalInfo PersonalInfo { get; set; }
-
         public Account Account { get; set; }
     }
 }

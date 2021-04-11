@@ -1,8 +1,11 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace ClassRegister.Models 
 {
+    // attribute make sure that email is unique
+    [Index(nameof(Account.Email), IsUnique = true)]
     public class Account
     {   
         [Key]

@@ -32,6 +32,8 @@ namespace ClassRegister
         {
             services.AddControllersWithViews();
 
+            // AppDomain.CurrentDomain.GetAssemblies() List the assemblies in the current application domain
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddDbContext<ClassRegisterContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("ClassRegisterContext")));
 

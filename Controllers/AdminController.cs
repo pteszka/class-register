@@ -12,7 +12,8 @@ using ClassRegister.Interfaces;
 using ClassRegister.Models;
 
 namespace ClassRegister.Controllers
-{
+{   
+    // [ViewLayout("_AdminLayout")]
     [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {

@@ -16,7 +16,13 @@ namespace ClassRegister.Profiles
             CreateMap<TeacherDTO, Teacher>()
                 .ForMember(dest => dest.TeacherId, opt => opt.Ignore())
                 .ForMember(dest => dest.Account, opt => opt.MapFrom(src => src))
-                .ForMember(dest => dest.PersonalInfo, opt => opt.MapFrom(src => src));                
+                .ForMember(dest => dest.PersonalInfo, opt => opt.MapFrom(src => src)); 
+
+            CreateMap<ClassDTO, Class>()
+                .ForMember(dest => dest.ClassId, opt => opt.Ignore())
+                .ForMember(dest => dest.Students, opt => opt.MapFrom(src => src)); 
+
+            
         }
     }
 }

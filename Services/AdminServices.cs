@@ -78,22 +78,51 @@ namespace ClassRegister.Services
             await _context.SaveChangesAsync();
         }
 
-        // Map TeacherDTO -> Account
-        private Account Account(TeacherDTO teacherDTO) 
-        {  
-            return _mapper.Map<Account>(teacherDTO);
+        public async Task<IEnumerable<Class>> GetClassesAsync()
+        {
+            var clss = await _context
+                            .Classes
+                            .ToListAsync();
+            return clss;      
         }
-        
-        // Map TeacherDTO -> PersonalInfo
-        private PersonalInfo PersonalInfo(TeacherDTO teacherDTO) 
-        {  
-            return _mapper.Map<PersonalInfo>(teacherDTO);
-        }        
+
+        public async Task<Class> GetClassAsync(int id)
+        {
+            var clss = await _context
+                            .Classes
+                            .FirstOrDefaultAsync(c => c.ClassId == id);
+            return clss;
+        }
+
+        public async Task CreateClassAsync(ClassDTO classDTO)
+        {
+            var clss = Class(classDTO);
+
+            await _context
+                    .Classes
+                    .AddAsync(clss);
+                    
+            await _context
+                    .SaveChangesAsync();        
+        }
+
+        public async Task DeleteClassAsync(Class clss)
+        {
+            _context.Classes.Remove(clss);
+
+            await _context.SaveChangesAsync();        }     
 
         // Map TeacherDTO -> Teacher
         private Teacher Teacher(TeacherDTO teacherDTO) 
         {  
             return _mapper.Map<Teacher>(teacherDTO);
         }
+
+        // Map ClassDTO -> Class
+        private Class Class(ClassDTO classDTO) 
+        {  
+            return _mapper.Map<Class>(classDTO);
+        }
+
     }
 }

@@ -13,5 +13,8 @@ namespace ClassRegister.Models
 
         [Required]
         public Account Account { get; set; }
+        
+        [Required]
+        public Class Class {get; set;}
     }
 }

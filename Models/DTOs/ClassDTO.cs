@@ -4,16 +4,13 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ClassRegister.Models
 {
-    public class Class
+    public class ClassDTO
     {
-        [Key]
-        public int ClassId { get; set; }
-
         [Required]
+        [Range(1, 8, ErrorMessage = "Grade should be number between {1} and {2}")]
         public int Grade { get; set; }
 
         [Required]
         public char Letter { get; set; }
-        public ICollection<Student> Students { get; set; }
     }
 }

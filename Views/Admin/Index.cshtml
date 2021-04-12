@@ -45,14 +45,16 @@
                     @Html.DisplayFor(modelTeacher => teacher.Subject)
                 </td>
                 <td>
-                    <form asp-action="Delete" method="post">
+                    <form asp-controller="Admin" asp-action="DeleteTeacher" method="post">
                         <input type="hidden" value="@teacher.TeacherId" name="id" />
-                        <input type="submit" asp-action="DeleteTeacher" data asp-route-id="@teacher.TeacherId" value="X" class="btn btn-outline-danger" />
-                    </form>                   
+                        <input type="submit" asp-action="DeleteTeacher" value="X" class="btn btn-outline-danger" />
+                    </form>      
+                    @* @await Html.PartialAsync("_ModalDeleteTeacherPartial", teacher) *@
                 </td>
             </tr>
         }
     </tbody>
 </table>
+
 
 <a asp-controller="Admin" asp-action="CreateTeacher" class="btn btn-primary">Add Teacher</a>

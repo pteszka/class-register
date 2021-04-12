@@ -33,6 +33,7 @@ namespace ClassRegister.Controllers
             return View();
         }
 
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateTeacher([FromForm]TeacherDTO teacherDTO)
@@ -43,6 +44,19 @@ namespace ClassRegister.Controllers
                 return RedirectToAction(nameof(Index));
             }
             return View(teacherDTO);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteTeacher(int id) 
+        {
+            var teacher = await _admin
+                                .GetTeacherAsync(id);
+
+            await _admin
+                    .DeleteTeacherAsync(teacher);
+
+            return RedirectToAction(nameof(Index));
         }
 
     }

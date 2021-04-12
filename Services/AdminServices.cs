@@ -71,6 +71,13 @@ namespace ClassRegister.Services
                     .SaveChangesAsync();
         }
 
+        public async Task DeleteTeacherAsync(Teacher teacher) 
+        {   
+            _context.Teachers.Remove(teacher);
+
+            await _context.SaveChangesAsync();
+        }
+
         // Map TeacherDTO -> Account
         private Account Account(TeacherDTO teacherDTO) 
         {  

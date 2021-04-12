@@ -20,20 +20,35 @@
             <th>
                 @Html.DisplayNameFor(model => model.PersonalInfo.DateOfBirth)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Subject)           
+            </th>
+            <th>
+                <a>Delete</a>
+            </th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model) 
+        @foreach (var teacher in Model) 
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.PersonalInfo.FirstName)
+                    @Html.DisplayFor(modelTeacher => teacher.PersonalInfo.FirstName)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.PersonalInfo.LastName)
+                    @Html.DisplayFor(modelTeacher => teacher.PersonalInfo.LastName)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.PersonalInfo.DateOfBirth)
+                    @Html.DisplayFor(modelTeacher => teacher.PersonalInfo.DateOfBirth)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelTeacher => teacher.Subject)
+                </td>
+                <td>
+                    <form asp-action="Delete" method="post">
+                        <input type="hidden" value="@teacher.TeacherId" name="id" />
+                        <input type="submit" asp-action="DeleteTeacher" data asp-route-id="@teacher.TeacherId" value="X" class="btn btn-outline-danger" />
+                    </form>                   
                 </td>
             </tr>
         }

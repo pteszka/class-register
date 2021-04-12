@@ -44,5 +44,6 @@ namespace ClassRegister.Controllers
             }
             return View(teacherDTO);
         }
+
     }
 }

@@ -10,8 +10,12 @@ namespace ClassRegister.Interfaces
     {
         Task<IEnumerable<Teacher>> GetTeachersAsync();
         Task<Teacher> GetTeacherAsync(int id);
-        // Task CreatePersonalInfoAsync(PersonalInfo personalInfo);
-        // Task CreateAccountAsync(Account account);
         Task CreateTeacherAsync(TeacherDTO teacherDTO);
+        Task DeleteTeacherAsync(Teacher teacher);
+
+        // Task<IEnumerable<Teacher>> GetStudentsAsync();
+        // Task<Teacher> GetStudentAsync(int id);
+        // Task CreateStudentAsync(StudentDTO studentDTO);
+
     }
 }

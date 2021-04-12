@@ -11,7 +11,7 @@ namespace ClassRegister.Models
     {
         [Key]
         public int TeacherId { get; set; }
-        public Subject subject { get; set; }
+        public Subject Subject { get; set; }
 
         [Required]
         public PersonalInfo PersonalInfo { get; set; }

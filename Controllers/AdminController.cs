@@ -24,21 +24,25 @@ namespace ClassRegister.Controllers
             _admin = admin;
         }
 
+        [Route("Admin/Teachers")]
         public async Task<IActionResult> Index()
         {
             return View(await _admin.GetTeachersAsync());
         }
 
+        [Route("Admin/Teachers/Create")]
         public IActionResult CreateTeacher()
         {
             return View();
         }
 
+        [Route("Admin/Classes")]
         public async Task<IActionResult> Classes()
         {
             return View(await _admin.GetClassesAsync());
         }
 
+        [Route("Admin/Classes/Create")]
         public IActionResult CreateClass()
         {
             return View();
@@ -46,6 +50,7 @@ namespace ClassRegister.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("Admin/Teachers/Create")]
         public async Task<IActionResult> CreateTeacher([FromForm]TeacherDTO teacherDTO)
         {
             if (ModelState.IsValid) 
@@ -58,6 +63,7 @@ namespace ClassRegister.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("Admin/Teachers")]
         public async Task<IActionResult> DeleteTeacher(int id) 
         {
             var teacher = await _admin
@@ -71,12 +77,13 @@ namespace ClassRegister.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("Admin/Classes/Create")]
         public async Task<IActionResult> CreateClass([FromForm]ClassDTO classDTO)
         {
             if (ModelState.IsValid) 
             {   
                 await _admin.CreateClassAsync(classDTO);
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Classes));
             }
             return View(classDTO);
         }
@@ -84,6 +91,7 @@ namespace ClassRegister.Controllers
         
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("Admin/Classes")]
         public async Task<IActionResult> DeleteClass(int id) 
         {
             var cls = await _admin
@@ -92,7 +100,7 @@ namespace ClassRegister.Controllers
             await _admin
                     .DeleteClassAsync(cls);
 
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Classes));
         }
 
     }

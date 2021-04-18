@@ -23,6 +23,15 @@ namespace ClassRegister.Interfaces
         Task CreateClassAsync(ClassDTO classDTO);
 
         Task DeleteClassAsync(Class Class);
+
+        Task<IEnumerable<Student>> GetStudentsAsync();
+
+        Task<Student> GetStudentAsync(int id);
+
+        Task CreateStudentAsync(StudentDTO studentDTO);
+
+        Task DeleteStudentAsync(Student student);
+
         // Task<IEnumerable<Teacher>> GetStudentsAsync();
         // Task<Teacher> GetStudentAsync(int id);
         // Task CreateStudentAsync(StudentDTO studentDTO);

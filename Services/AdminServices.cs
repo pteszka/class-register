@@ -113,6 +113,40 @@ namespace ClassRegister.Services
             await _context.SaveChangesAsync();        
         }     
 
+        public async Task<IEnumerable<Student>> GetStudentsAsync()
+        {
+            var students = await _context
+                                .Students
+                                .ToListAsync();
+            return students;
+        }
+
+        public async Task<Student> GetStudentAsync(int id)
+        {
+            var student = await _context
+                                .Students
+                                .FirstOrDefaultAsync(s => s.StudentId == id);
+            return student;
+        }
+
+        public async Task CreateStudentAsync(StudentDTO studentDTO)
+        {
+            var student = Student(studentDTO);
+
+            await _context
+                    .Students
+                    .AddAsync(student);
+                    
+            await _context
+                    .SaveChangesAsync();           }
+
+        public async Task DeleteStudentAsync(Student student)
+        {
+            _context.Students.Remove(student);
+
+            await _context.SaveChangesAsync();          
+        }
+
         // Map TeacherDTO -> Teacher
         private Teacher Teacher(TeacherDTO teacherDTO) 
         {  
@@ -125,5 +159,10 @@ namespace ClassRegister.Services
             return _mapper.Map<Class>(classDTO);
         }
 
+        // Map StudentDTO -> Student
+        private Student Student(StudentDTO studentDTO) 
+        {  
+            return _mapper.Map<Student>(studentDTO);
+        }
     }
 }

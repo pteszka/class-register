@@ -22,6 +22,17 @@ namespace ClassRegister.Profiles
                 .ForMember(dest => dest.ClassId, opt => opt.Ignore())
                 .ForMember(dest => dest.Students, opt => opt.Ignore()); 
 
+            CreateMap<StudentDTO, PersonalInfo>()
+                .ForMember(dest => dest.PersonalInfoId, opt => opt.Ignore());
+            CreateMap<StudentDTO, Account>()
+                .ForMember(dest => dest.AccountId, opt => opt.Ignore())
+                .ForMember(dest => dest.Role, opt => opt.Ignore());
+            // add map for class 
+            CreateMap<StudentDTO, Student>()
+                .ForMember(dest => dest.StudentId, opt => opt.Ignore())
+                .ForMember(dest => dest.Account, opt => opt.MapFrom(src => src))
+                .ForMember(dest => dest.PersonalInfo, opt => opt.MapFrom(src => src)); 
+
             
         }
     }

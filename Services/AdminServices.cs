@@ -110,7 +110,8 @@ namespace ClassRegister.Services
         {
             _context.Classes.Remove(clss);
 
-            await _context.SaveChangesAsync();        }     
+            await _context.SaveChangesAsync();        
+        }     
 
         // Map TeacherDTO -> Teacher
         private Teacher Teacher(TeacherDTO teacherDTO) 

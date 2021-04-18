@@ -14,6 +14,7 @@ namespace ClassRegister.Models
 
         [Required]
         public char Letter { get; set; }
+        
         public ICollection<Student> Students { get; set; }
     }
 }

@@ -34,6 +34,15 @@ namespace ClassRegister.Controllers
             return View();
         }
 
+        public async Task<IActionResult> Classes()
+        {
+            return View(await _admin.GetClassesAsync());
+        }
+
+        public IActionResult CreateClass()
+        {
+            return View();
+        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -56,6 +65,32 @@ namespace ClassRegister.Controllers
 
             await _admin
                     .DeleteTeacherAsync(teacher);
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateClass([FromForm]ClassDTO classDTO)
+        {
+            if (ModelState.IsValid) 
+            {   
+                await _admin.CreateClassAsync(classDTO);
+                return RedirectToAction(nameof(Index));
+            }
+            return View(classDTO);
+        }
+        
+        
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteClass(int id) 
+        {
+            var cls = await _admin
+                                .GetClassAsync(id);
+
+            await _admin
+                    .DeleteClassAsync(cls);
 
             return RedirectToAction(nameof(Index));
         }

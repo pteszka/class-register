@@ -1,0 +1,43 @@
+@model IEnumerable<Class>
+
+@{
+    ViewData["Title"] = "Class Page";
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Grade)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Letter)
+            </th>
+            <th>
+                <a>Delete</a>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var cls in Model) 
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelClass => cls.Grade)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelClass => cls.Letter)
+                </td>
+                <td>
+                    <form asp-controller="Admin" asp-action="DeleteClass" method="post">
+                        <input type="hidden" value="@cls.ClassId" name="id" />
+                        <input type="submit" asp-action="DeleteClass" value="X" class="btn btn-outline-danger" />
+                    </form>      
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+<a asp-controller="Admin" asp-action="CreateClass" class="btn btn-primary">Add Class</a>

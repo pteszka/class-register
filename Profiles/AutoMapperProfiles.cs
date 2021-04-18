@@ -20,7 +20,7 @@ namespace ClassRegister.Profiles
 
             CreateMap<ClassDTO, Class>()
                 .ForMember(dest => dest.ClassId, opt => opt.Ignore())
-                .ForMember(dest => dest.Students, opt => opt.MapFrom(src => src)); 
+                .ForMember(dest => dest.Students, opt => opt.Ignore()); 
 
             
         }
